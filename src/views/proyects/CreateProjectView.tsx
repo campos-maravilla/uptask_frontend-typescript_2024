@@ -1,21 +1,22 @@
 import ProjectForm from "@/components/projects/ProjectForm";
 import { createProject } from "@/api/ProjectAPI";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { ProjectFormData } from "@/types/index";
 
-
 export default function CreateProjectView() {
-  
+
+const navigate=useNavigate()  
     const initialValues:ProjectFormData={
             projectName:"",
             clientName:"",
-            description:""
+            description:"",
     }
     const {register,handleSubmit,formState:{errors}}=useForm({defaultValues:{initialValues}})
     
-    const handleForm=(data:ProjectFormData)=>{
-        createProject(data)
+    const handleForm=async(data:ProjectFormData)=>{
+      await  createProject(data)
+        navigate('/')
     }
     
   return (
