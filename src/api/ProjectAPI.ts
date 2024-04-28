@@ -13,3 +13,16 @@ export async function createProject(formData:ProjectFormData){
         }
     }
 }
+
+//obtener todos los proyectos
+export async function getProjects(){
+    try {
+        const {data}=await api('/projects')
+       //console.log(data)
+        return data
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+}
