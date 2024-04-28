@@ -8,10 +8,10 @@ export default function DashboardViews() {
     queryFn:getProjects
   })
   
-if(isLoading) return 'Cargando...'
-  console.log(data)
+  if(isLoading) return 'Cargando...'
+ 
   
-  return (
+ if(data) return (
     <>
       <h1 className="text-5xl font-black">Mis Proyectos</h1>
       <p className="text-2xl font-light text-gray-500 mt-5">Maneja y administra tus proyectos</p>
@@ -23,6 +23,20 @@ if(isLoading) return 'Cargando...'
         Nuevo Proyecto
       </Link>
         </nav>
+        
+        {data.length ? (
+          <p>si hay proyectos</p>
+        ):(
+          <p className="text-center py-20">
+           No hay proyectos aùn {''}
+        <Link 
+        to='/projects/create'
+        className="text-fuchsia-500 font-bold"
+        >
+         Crear Proyecto
+        </Link>
+          </p>
+        )}
     </>
   )
 }
