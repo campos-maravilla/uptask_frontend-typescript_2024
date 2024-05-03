@@ -11,12 +11,14 @@ import { useMutation } from "@tanstack/react-query";
 export default function CreateProjectView() {
 
 const navigate=useNavigate()  
-    const initialValues:ProjectFormData={
+   /*  const initialValues:ProjectFormData={
             projectName:"",
             clientName:"",
             description:"",
-    }
-    const {register,handleSubmit,formState:{errors}}=useForm({defaultValues:{initialValues}})
+    } */
+    const {register,handleSubmit,formState:{errors}}=useForm({defaultValues:{  projectName:"",
+    clientName:"",
+    description:"",}})
     
     const {mutate}=useMutation({
       mutationFn:createProject,
