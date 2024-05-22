@@ -1,6 +1,7 @@
 import { getTaskById } from "@/api/TaskAPI"
 import { useQuery } from "@tanstack/react-query"
 import { useLocation, useParams } from "react-router-dom"
+import EditTaskModal from "./EditTaskModal"
 
 export default function EditTaskData() {
     //para traer el projecto de la tarea 
@@ -15,10 +16,9 @@ export default function EditTaskData() {
    // console.log(taskId)
    const {data}=useQuery({
     queryKey:['task',taskId],
-    queryFn:()=>getTaskById({projectId,taskId})
+    queryFn:()=>getTaskById({projectId,taskId}),
+    enabled:!!taskId // retorna true o false ,si no hay taskId la consulta no se hace  
    })
-    console.log(data)
-  return (
-    <div>EditTaskData</div>
-  )
+   
+    if(data) return <EditTaskModal/>
 }
