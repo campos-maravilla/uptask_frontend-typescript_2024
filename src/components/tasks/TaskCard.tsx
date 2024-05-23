@@ -19,6 +19,7 @@ export default function TaskCard({task}:TaskCardProps) {
    //console.log(params.projectId)
    const projectId=params.projectId! 
    
+   const queryClient=useQueryClient()
    const {mutate}=useMutation({
     mutationFn:deleteTask,
     onError:(error)=>{
@@ -26,6 +27,7 @@ export default function TaskCard({task}:TaskCardProps) {
     },
     onSuccess:(data)=>{
         toast.success(data)
+        queryClient.invalidateQueries({queryKey:['project',projectId]})
     }
 })
     
