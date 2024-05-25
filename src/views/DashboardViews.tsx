@@ -12,7 +12,7 @@ export default function DashboardViews() {
     queryKey:['projects'],
     queryFn:getProjects
   })
-   //para que elimine el proyecto y no tener que eliminar 
+   //para que elimine el proyecto y no tener que recargar 
    const queryClient=useQueryClient()
   const {mutate}=useMutation({
     mutationFn:deleteProject,

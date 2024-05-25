@@ -11,9 +11,10 @@ import { toast } from 'react-toastify';
 
 
 type EditTaskModalProps={
-    data:Task
+    data:Task 
     taskId:Task['_id']
 }
+
 
 export default function EditTaskModal({data,taskId}:EditTaskModalProps) {
     const navigate=useNavigate()
@@ -34,7 +35,7 @@ export default function EditTaskModal({data,taskId}:EditTaskModalProps) {
             toast.error(error.message)
         },
         onSuccess:(data)=>{
-            queryClient.invalidateQueries({queryKey:['editProjects',projectId],})
+            queryClient.invalidateQueries({queryKey:['editProjects',projectId]})
             toast.success(data)
             reset()
             navigate(location.pathname,{replace:true})
