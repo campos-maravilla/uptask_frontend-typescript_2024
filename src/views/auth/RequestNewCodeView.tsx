@@ -14,7 +14,7 @@ export default function RegisterView() {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
