@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
 import api from "@/lib/axios";
-import { Project, TeamMemberForm } from "../types";
+import { Project, TeamMember, TeamMemberForm } from "../types";
 
 export async function findUserByEmail({ projectId, formData }: { projectId: Project['_id'], formData: TeamMemberForm }) {
     try {
@@ -13,5 +13,18 @@ export async function findUserByEmail({ projectId, formData }: { projectId: Proj
         }
     }
 }
+
+export async function addUserToProject({ projectId, id }: { projectId: Project['_id'], id: TeamMember['_id'] }) {
+    try {
+        const url = `/projects/${projectId}/team`
+        const { data } = await api.post(url, { id })
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
+
 
 
