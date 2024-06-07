@@ -16,13 +16,17 @@ export default function AddMemberForm() {
   const {
     register,
     handleSubmit,
-    //reset,
+    reset,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
   const mutation = useMutation({
     mutationFn: findUserByEmail,
   });
+
+  const resetData = () => {
+    reset(), mutation.reset();
+  };
 
   const handleSearchUser = async (formData: TeamMemberForm) => {
     const data = { projectId, formData };
@@ -67,7 +71,9 @@ export default function AddMemberForm() {
         {mutation.error && (
           <p className="text-center">{mutation.error.message}</p>
         )}
-        {mutation.data && <SearchResult user={mutation.data} />}
+        {mutation.data && (
+          <SearchResult user={mutation.data} reset={resetData} />
+        )}
       </div>
     </>
   );
