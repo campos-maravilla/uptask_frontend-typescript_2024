@@ -75,3 +75,5 @@ const teamMemberSchema = userSchema.pick({
 })
 export type TeamMember = z.infer<typeof teamMemberSchema>
 export type TeamMemberForm = Pick<TeamMember, 'email'>
+//para mostrar todos los colaboradores esto va para getProjectTeam(TeamAPI)
+export const teamMembersSchema = z.array(teamMemberSchema)
