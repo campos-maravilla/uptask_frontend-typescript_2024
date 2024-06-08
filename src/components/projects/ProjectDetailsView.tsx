@@ -7,6 +7,7 @@ import EditTaskData from "../tasks/EditTaskData";
 import TaskModalDetails from "../tasks/TaskModalDetails";
 import { useAuth } from "@/hooks/useAuth";
 import { isManager } from "@/utils/policies";
+import { useMemo } from "react";
 
 export default function ProjectDetailsView() {
   const { data: user, isLoading: authLoading } = useAuth();
@@ -21,6 +22,9 @@ export default function ProjectDetailsView() {
     retry: false,
   });
 
+  // para que no pueda ver editar tareas y eliminar
+  const canEdit = useMemo(() => data?.manager === user?._id, [data, user]);
+  // console.log(canEdit);
   if (isLoading && authLoading) return "Cargando...";
   if (isError) return <Navigate to="/404" />;
 
@@ -49,7 +53,7 @@ export default function ProjectDetailsView() {
           </nav>
         )}
 
-        <TaskList tasks={data.tasks} />
+        <TaskList tasks={data.tasks} canEdit={canEdit} />
         <AddTaskModal />
         <EditTaskData />
         <TaskModalDetails />
