@@ -26,10 +26,9 @@ export async function getTaskById({ projectId, taskId }: Pick<TaskAPI, 'projectI
     try {
         const url = `projects/${projectId}/tasks/${taskId}`
         const { data } = await api(url)
-        //console.log(data)
-        return data
         const response = taskSchema.safeParse(data)
         //console.log(response.data)
+        //console.log(response)
         if (response.success) {
             return response.data
         }
