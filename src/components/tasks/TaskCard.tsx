@@ -30,7 +30,7 @@ export default function TaskCard({ task, canEdit }: TaskCardProps) {
     },
   });
 
-  console.log(task);
+  //console.log(task);
 
   return (
     <li className="p-5 bg-white border border-slate-500 flex justify-between gap-3">
