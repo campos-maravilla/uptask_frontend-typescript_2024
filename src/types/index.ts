@@ -34,6 +34,18 @@ export type User = z.infer<typeof userSchema>
 export const taskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export type TaskStatus = z.infer<typeof taskStatusSchema>
 
+/** Notes los ultimos types **/
+const noteSchema = z.object({
+    _id: z.string(),
+    content: z.string(),
+    createdBy: userSchema,
+    task: z.string(),
+    createdAt: z.string() //se agrega para poder ver las notas,despues del form
+})
+export type Note = z.infer<typeof noteSchema>
+export type NoteFormData = Pick<Note, 'content'>
+/** Notes **/
+
 export const taskSchema = z.object({
     _id: z.string(),
     name: z.string(),
@@ -47,6 +59,9 @@ export const taskSchema = z.object({
         user: userSchema,
         status: taskStatusSchema
     })),
+    notes: z.array(noteSchema.extend({
+        createdBy: userSchema
+    }))
 })
 
 export type Task = z.infer<typeof taskSchema>
@@ -85,12 +100,3 @@ export type TeamMemberForm = Pick<TeamMember, 'email'>
 //para mostrar todos los colaboradores esto va para getProjectTeam(TeamAPI)
 export const teamMembersSchema = z.array(teamMemberSchema)
 
-/** Notes **/
-const noteSchema = z.object({
-    _id: z.string(),
-    content: z.string(),
-    createdBy: userSchema,
-    task: z.string()
-})
-export type Note = z.infer<typeof noteSchema>
-export type NoteFormData = Pick<Note, 'content'>
