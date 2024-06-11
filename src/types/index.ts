@@ -84,3 +84,13 @@ export type TeamMember = z.infer<typeof teamMemberSchema>
 export type TeamMemberForm = Pick<TeamMember, 'email'>
 //para mostrar todos los colaboradores esto va para getProjectTeam(TeamAPI)
 export const teamMembersSchema = z.array(teamMemberSchema)
+
+/** Notes **/
+const noteSchema = z.object({
+    _id: z.string(),
+    content: z.string(),
+    createdBy: userSchema,
+    task: z.string()
+})
+export type Note = z.infer<typeof noteSchema>
+export type NoteFormData = Pick<Note, 'content'>
