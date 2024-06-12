@@ -34,7 +34,10 @@ export default function Router() {
           />
           <Route element={<ProfileLayout />}>
             <Route path="/profile" element={<ProfileView />} />
-            <Route path="/change-password" element={<ChangePasswordView />} />
+            <Route
+              path="/profile/change-password"
+              element={<ChangePasswordView />}
+            />
           </Route>
         </Route>
 
