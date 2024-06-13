@@ -1,5 +1,6 @@
 import { deleteTask } from "@/api/TaskAPI";
 import { Task } from "@/types/index";
+import { useDraggable } from "@dnd-kit/core";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
@@ -13,6 +14,9 @@ type TaskCardProps = {
 };
 
 export default function TaskCard({ task, canEdit }: TaskCardProps) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task._id,
+  });
   const navigate = useNavigate();
   const params = useParams();
   //console.log(params.projectId)
@@ -31,10 +35,17 @@ export default function TaskCard({ task, canEdit }: TaskCardProps) {
   });
 
   //console.log(task);
+  const style = transform ? {} : undefined;
 
   return (
     <li className="p-5 bg-white border border-slate-500 flex justify-between gap-3">
-      <div className="min-w-0 flex flex-col gap-y-4">
+      <div
+        {...listeners}
+        {...attributes}
+        ref={setNodeRef}
+        style={style}
+        className="min-w-0 flex flex-col gap-y-4"
+      >
         <button
           type="button"
           className="text-xl font-bold text-slate-600 text-left"
