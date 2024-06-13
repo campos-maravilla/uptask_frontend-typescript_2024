@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 
-import { deleteProject, getProjects } from "@/api/ProjectAPI";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getProjects } from "@/api/ProjectAPI";
+import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
 import { isManager } from "@/utils/policies";
 import DeleteProjectModal from "@/components/projects/DeleteProjectModal";
@@ -19,18 +19,7 @@ export default function DashboardViews() {
     queryKey: ["projects"],
     queryFn: getProjects,
   });
-  //para que elimine el proyecto y no tener que recargar
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: deleteProject,
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: (data) => {
-      toast.success(data);
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
-    },
-  });
+  //para que elimine el proyecto y no tener que recargar mutate a pasa a DeleteProjectModal
 
   // console.log(data);
   // console.log(user?._id);
