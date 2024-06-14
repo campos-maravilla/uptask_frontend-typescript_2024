@@ -90,6 +90,12 @@ export const dashboardProjectSchema = z.array(
     })
 )
 
+/* esto se hace porque en EditProjectView y ProyectDetailView la data esta como any */
+export const editProjectSchema = projectSchema.pick({
+    projectName: true,
+    clientName: true,
+    description: true,
+})
 export type Project = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<Project, 'clientName' | 'projectName' | 'description'>
 
