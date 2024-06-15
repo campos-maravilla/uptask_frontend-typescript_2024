@@ -1,5 +1,5 @@
 import { deleteTask } from "@/api/TaskAPI";
-import { Task } from "@/types/index";
+import { TaskProject } from "@/types/index";
 import { useDraggable } from "@dnd-kit/core";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { Fragment } from "react/jsx-runtime";
 
 type TaskCardProps = {
-  task: Task;
+  task: TaskProject;
   canEdit: boolean;
 };
 
